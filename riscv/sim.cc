@@ -238,14 +238,13 @@ void sim_t::make_dtb()
 
 void sim_t::set_rom()
 {
-  const int reset_vec_size = 8;
+  const int reset_vec_size = 7;
 
   start_pc = start_pc == reg_t(-1) ? get_entry_point() : start_pc;
 
   uint32_t reset_vec[reset_vec_size] = {
     0x297,                                      // auipc  t0,0x0
     0x28593 + (reset_vec_size * 4 << 20),       // addi   a1, t0, &dtb
-    0xf1402573,                                 // csrr   a0, mhartid
     get_core(0)->get_xlen() == 32 ?
       0x0182a283u :                             // lw     t0,24(t0)
       0x0182b283u,                              // ld     t0,24(t0)
