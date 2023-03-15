@@ -28,6 +28,9 @@ riscv_hdrs = \
 	extension.h \
 	rocc.h \
 	insn_template.h \
+	interface.h \
+	libriscv.h \
+	libriscv_generated.h \
 	debug_module.h \
 	debug_rom_defines.h \
 	remote_bitbang.h \
@@ -39,6 +42,7 @@ riscv_precompiled_hdrs = \
 	insn_template.h \
 
 riscv_srcs = \
+	interface.cc \
 	processor.cc \
 	execute.cc \
 	dts.cc \
@@ -70,8 +74,6 @@ riscv_gen_hdrs = \
 riscv_insn_ext_i = \
 	add \
 	addi \
-	addiw \
-	addw \
 	and \
 	andi \
 	auipc \
@@ -85,40 +87,29 @@ riscv_insn_ext_i = \
 	jalr \
 	lb \
 	lbu \
-	ld \
 	lh \
 	lhu \
 	lui \
 	lw \
-	lwu \
 	or \
 	ori \
 	sb \
-	sd \
 	sh \
 	sll \
 	slli \
-	slliw \
-	sllw \
 	slt \
 	slti \
 	sltiu \
 	sltu \
 	sra \
 	srai \
-	sraiw \
-	sraw \
 	srl \
 	srli \
-	srliw \
-	srlw \
 	sub \
-	subw \
 	sw \
 	xor \
 	xori \
-	fence \
-	fence_i \
+	fence
 
 riscv_insn_ext_a = \
 	amoadd_d \
@@ -772,18 +763,7 @@ riscv_insn_priv = \
 	wfi \
 
 
-riscv_insn_list = \
-	$(riscv_insn_ext_a) \
-	$(riscv_insn_ext_c) \
-	$(riscv_insn_ext_i) \
-	$(riscv_insn_ext_m) \
-	$(riscv_insn_ext_f) \
-	$(riscv_insn_ext_d) \
-	$(riscv_insn_ext_zfh) \
-	$(riscv_insn_ext_q) \
-	$(if $(HAVE_INT128),$(riscv_insn_ext_v),) \
-	$(riscv_insn_ext_h) \
-	$(riscv_insn_priv) \
+riscv_insn_list = $(riscv_insn_ext_i)
 
 riscv_gen_srcs = \
 	$(addsuffix .cc,$(riscv_insn_list))

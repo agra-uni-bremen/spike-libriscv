@@ -1,5 +1,6 @@
 // See LICENSE for license details.
 
+#include "interface.h"
 #include "processor.h"
 #include "extension.h"
 #include "common.h"
@@ -44,6 +45,7 @@ processor_t::processor_t(const char* isa, const char* priv, const char* varch,
 
   set_pmp_granularity(1 << PMP_SHIFT);
   set_pmp_num(state.max_pmp);
+  init_core(this);
   reset();
 }
 
