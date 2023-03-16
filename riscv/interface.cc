@@ -12,8 +12,8 @@ void init_core(processor_t *_core) {
 	p = _core;
 }
 
-void set_npc(reg_t *npc) {
-	npc = npc;
+void set_npc(reg_t *_npc) {
+	npc = _npc;
 }
 
 ////
