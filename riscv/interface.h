@@ -8,7 +8,6 @@
 
 /* Spike-specific API */
 void init_core(processor_t *);
-void set_npc(reg_t *);
 
 extern "C" {
 

@@ -6,14 +6,9 @@
 #include "interface.h"
 
 static processor_t *p;
-static reg_t *npc;
 
 void init_core(processor_t *_core) {
 	p = _core;
-}
-
-void set_npc(reg_t *_npc) {
-	npc = _npc;
 }
 
 ////
@@ -39,13 +34,13 @@ write_register(unsigned idx, uint32_t value)
 uint32_t
 read_next_pc(void)
 {
-	return (uint32_t)*npc;
+	return p->get_state()->pc;
 }
 
 void
 write_pc(uint32_t newPC)
 {
-	*npc = newPC;
+	p->get_state()->pc = newPC;
 }
 
 ////

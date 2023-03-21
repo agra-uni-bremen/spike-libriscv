@@ -7,11 +7,10 @@
 reg_t rv32_NAME(processor_t* p, insn_t insn, reg_t pc)
 {
   int xlen = 32;
-  reg_t npc = sext_xlen(pc + insn_length(OPCODE));
-  set_npc(&npc);
+  write_pc(sext_xlen(pc + insn_length(OPCODE)));
   exec_NAME((uint32_t)pc, (void*)&insn);
   trace_opcode(p, OPCODE, insn);
-  return npc;
+  return read_next_pc();
 }
 
 reg_t rv64_NAME(processor_t* p, insn_t insn, reg_t pc)
