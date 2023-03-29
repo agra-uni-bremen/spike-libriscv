@@ -1,6 +1,5 @@
 // See LICENSE for license details.
 
-#include "interface.h"
 #include "libriscv.h"
 #include "insn_template.h"
 

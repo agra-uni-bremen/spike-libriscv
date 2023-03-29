@@ -3,9 +3,7 @@
 
 #include <stdlib.h>
 
-extern "C" {
 #include "interface.h"
 #include "libriscv_generated.h"
-}
 
 #endif

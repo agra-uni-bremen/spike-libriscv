@@ -1,6 +1,5 @@
 // See LICENSE for license details.
 
-#include "interface.h"
 #include "processor.h"
 #include "extension.h"
 #include "common.h"
