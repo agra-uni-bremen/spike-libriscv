@@ -5,25 +5,21 @@
 #include "decode.h"
 #include "interface.h"
 
-static processor_t *p;
-
-void init_core(processor_t *_core) {
-	p = _core;
-}
-
 ////
 // Register File
 ////
 
 uint32_t
-read_register(unsigned idx)
+read_register(void *core, unsigned idx)
 {
+	processor_t *p = (processor_t*)core;
 	return READ_REG(idx);
 }
 
 void
-write_register(unsigned idx, uint32_t value)
+write_register(void *core, unsigned idx, uint32_t value)
 {
+	processor_t *p = (processor_t*)core;
 	WRITE_REG(idx, value);
 }
 
@@ -32,14 +28,16 @@ write_register(unsigned idx, uint32_t value)
 ////
 
 uint32_t
-read_next_pc(void)
+read_next_pc(void *core)
 {
+	processor_t *p = (processor_t*)core;
 	return p->get_state()->pc;
 }
 
 void
-write_pc(uint32_t newPC)
+write_pc(void *core, uint32_t newPC)
 {
+	processor_t *p = (processor_t*)core;
 	p->get_state()->pc = newPC;
 }
 
@@ -48,38 +46,44 @@ write_pc(uint32_t newPC)
 ////
 
 uint8_t
-load_byte(uint32_t addr)
+load_byte(void *core, uint32_t addr)
 {
+	processor_t *p = (processor_t*)core;
 	return MMU.load_uint8(addr);
 }
 
 uint16_t
-load_half(uint32_t addr)
+load_half(void *core, uint32_t addr)
 {
+	processor_t *p = (processor_t*)core;
 	return MMU.load_uint16(addr);
 }
 
 uint32_t
-load_word(uint32_t addr)
+load_word(void *core, uint32_t addr)
 {
+	processor_t *p = (processor_t*)core;
 	return MMU.load_uint32(addr);
 }
 
 void
-store_byte(uint32_t addr, uint8_t value)
+store_byte(void *core, uint32_t addr, uint8_t value)
 {
+	processor_t *p = (processor_t*)core;
 	MMU.store_uint8(addr, value);
 }
 
 void
-store_half(uint32_t addr, uint16_t value)
+store_half(void *core, uint32_t addr, uint16_t value)
 {
+	processor_t *p = (processor_t*)core;
 	MMU.store_uint16(addr, value);
 }
 
 void
-store_word(uint32_t addr, uint32_t value)
+store_word(void *core, uint32_t addr, uint32_t value)
 {
+	processor_t *p = (processor_t*)core;
 	MMU.store_uint32(addr, value);
 }
 
